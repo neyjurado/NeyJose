@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RaFer - Reserva de Vuelos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>✈️ RaFer</h1>
+        <p>Tu aplicación de gestión de vuelos</p>
+    </header>
+
+    <main>
+        <section id="buscador">
+            <h2>Busca tu Vuelo</h2>
+            
+            <div class="campo">
+                <label for="origen">Origen:</label>
+                <select id="origen">
+                    <option value="Madrid">Madrid (MAD)</option>
+                    <option value="Barcelona">Barcelona (BCN)</option>
+                    <option value="Buenos Aires">Buenos Aires (EZE)</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="destino">Destino:</label>
+                <select id="destino">
+                    <option value="Londres">Londres (LHR)</option>
+                    <option value="París">París (CDG)</option>
+                    <option value="Nueva York">Nueva York (JFK)</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="fecha">Fecha de salida:</label>
+                <input type="date" id="fecha">
+            </div>
+
+            <button type="button" onclick="buscarVuelo()">Buscar Disponibilidad</button>
+        </section>
+
+        <section id="resultado" style="display: none;">
+            <h3>Resultados de la búsqueda</h3>
+            <div id="contenido-vuelo"></div>
+        </section>
+    </main>
+
+    <script>
+        function buscarVuelo() {
+            const origen = document.getElementById('origen').value;
+            const destino = document.getElementById('destino').value;
+            const fecha = document.getElementById('fecha').value;
+            const resultadoSeccion = document.getElementById('resultado');
+            const contenido = document.getElementById('contenido-vuelo');
+
+            if (!fecha) {
+                alert("Por favor, selecciona una fecha.");
+                return;
+            }
+
+            resultadoSeccion.style.display = "block";
+            contenido.innerHTML = `
+                <p>De: <strong>${origen}</strong></p>
+                <p>A: <strong>${destino}</strong></p>
+                <p>Fecha: ${fecha}</p>
+                <p>Precio: $${Math.floor(Math.random() * 400 + 100)}</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>
