@@ -3,13 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RaFer - Reserva de Vuelos</title>
+    <title>AeroHub - Reserva de Vuelos</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <nav class="navbar">
+        <div class="navbar-container">
+            <span id="user-greeting">Bienvenido</span>
+            <button id="logout-btn" class="logout-btn">Cerrar Sesión</button>
+        </div>
+    </nav>
+
     <header>
-        <h1>✈️ RaFer</h1>
+        <h1>✈️ AeroHub</h1>
         <p>Tu aplicación de gestión de vuelos</p>
     </header>
 
@@ -49,7 +56,29 @@
         </section>
     </main>
 
+    <script src="auth.js"></script>
     <script>
+        // Verificar si el usuario está autenticado
+        function checkAuth() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const user = JSON.parse(currentUser);
+            document.getElementById('user-greeting').textContent = '¡Hola, ' + user.name + '!';
+        }
+
+        // Cerrar sesión
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        });
+
+        // Verificar autenticación al cargar la página
+        checkAuth();
+
         function buscarVuelo() {
             const origen = document.getElementById('origen').value;
             const destino = document.getElementById('destino').value;
